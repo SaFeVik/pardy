@@ -1,0 +1,225 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+main{
+    background-color: rgb(108, 186, 255);
+}
+#festWrapper{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin-block: 20px;
+    max-width: 650px;
+    margin-inline: auto;
+}
+.fest{
+    display: flex;
+    justify-content: center;
+    width: 288px;
+    height: 512px;
+    position: relative;
+    text-align: center;
+    background: center no-repeat;
+    background-size: cover;
+    overflow: auto;
+    margin: 18.5px;
+}
+
+/* Sted og rating */
+.stedBox, .baddiesBox, .datoBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+}
+.stedBox{
+    background: #ffffff;
+    padding: 5px;
+    width: 100%;
+    border: 2px solid black;
+    z-index: 1;
+}
+.mapIcon{
+    height: 20px;
+}
+.rating{
+    position: relative;
+    top: 41px;
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+}
+.rating img{
+    height: 20px;
+    margin-inline: 16px;
+}
+.ratingBox{
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    align-items: center;
+    color: white;
+    padding-top: 70px;
+}
+.ratingBox.show{
+    display: block;
+}
+.ratingRange{
+    width: 250px;
+    cursor: pointer;
+}
+.ratingValue{
+    font-size: 20px;
+}
+.ratingButton{
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Comments, images, notes */
+.comment, .images, .notes{
+    width: 40px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    transition: scale 0.2s;
+}
+.comment:hover, .images:hover, .notes:hover{
+    scale: 1.05;
+}
+.comment{
+    top: 50%;
+}
+.images{
+    top: 60%;
+}
+.notes{
+    top: 70%;
+    right: 5px;
+}
+
+.imagesSection, .notesSection, .commentSection{
+    position: absolute;
+    width: 100%;
+    background: rgb(0, 0, 0);
+    display: none;
+    padding: 10px;
+    z-index: 2;
+}
+.imagesSection.show, .notesSection.show, .commentSection.show{
+    display: flex;
+}
+.imagesSection{
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.imagesSection img{
+    width: 273.6px;
+    height: 486.4px;
+    object-fit: cover;
+}
+.notesSection{
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    color: white;
+    height: 100%;
+    line-height: 20px;
+}
+/* Commentsection */
+.commentSection{
+    height: 100%;
+}
+.commentInputDiv{
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    display: flex;
+    gap: 10px;
+    width: 80%;
+    margin-bottom: 10px;
+    border-top: 1px solid rgb(134, 134, 134);
+    padding-block: 10px;
+}
+.commentInput{
+    width: 100%;
+    padding: 10px;
+    padding-block: 5px;
+    border-radius: 15px;
+}
+.sendIcon{
+    margin-top: 6px;
+    width: 25px;
+    cursor: pointer;
+}
+/* Comment place */
+.commentPlace{
+    display: flex;
+    flex-direction: column-reverse;
+    background: rgb(67, 67, 67);
+    height: 88%;
+    width: 100%;
+    color: white;
+    overflow: auto;
+}
+.commentDiv{
+    position: relative;
+    text-align: left;
+    padding: 10px;
+    background: gray;
+    border-top: 5px solid black;
+}
+.commentUser{
+    text-shadow: 1px 1px 1px black;
+}
+.commentTxt{
+    font-size: 15px;
+}
+.commentSlett{
+    font-size: 12px;
+    position: absolute;
+    padding: 4px;
+    background: rgb(82, 82, 82);
+    border-radius: 5px;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.x{
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    cursor: pointer;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    z-index: 1;
+}
+/* Dato og baddies */
+.datoBox{
+    background: #C9EEFF;
+    padding: 5px;
+    bottom: 0;
+    right: 0;
+    border-top-left-radius: 5px;
+}
+.dateIcon{
+    height: 20px;
+}
+.baddiesBox{
+    bottom: 0;
+    left: 0;
+    border-top-right-radius: 5px;
+    background: #C9EEFF;
+    padding: 5px;
+}
+.girlIcon{
+    height: 21.5px;
+}
