@@ -160,6 +160,7 @@ const db = getFirestore()
 
 const ratingsColRef = collection(db, 'ratings')
 const commentsColRef = collection(db, 'comments')
+const usersColRef = collection(db, 'users')
 
 // Ratings
 let ratings
@@ -240,20 +241,50 @@ const loggUtBtn = document.querySelector('#loggUt')
 loggInnBtn.addEventListener('click', signingIn)
 loggUtBtn.addEventListener('click', signingOut)
 const userNameEl = document.querySelector('#userName')
+const loginErrorEl = document.querySelector('#loginError')
+let loginMessageEl = document.querySelector('.loginMessage')
 
 function signingIn(){
     signInWithPopup(auth, googleProvider)
 }
 function signingOut(){
     signOut(auth)
+    loginMessageEl.innerHTML = 'Please logg inn mann'
 }
-auth.onAuthStateChanged((user) =>{
-    if(user){
-        userNameEl.innerHTML = user.displayName
-    }else{
-      userNameEl.innerHTML = "Not logged in"
-    }
+let users
+onSnapshot(usersColRef, (snapshot) => {
+    users = []
+    snapshot.docs.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id })
+    })
+    console.log("users",users)
+    authChange()
 })
+function authChange(){
+    auth.onAuthStateChanged((user) =>{
+        console.log(user)
+        if(user){
+            for(let i=0; i<users.length; i++){
+                console.log(user.email, users[i].email)
+                if(user.email == users[i].email){
+                    userNameEl.innerHTML = user.displayName
+                    loginErrorEl.classList.remove('show')
+                    festWrapperEl.classList.remove('hide')
+                    console.log('Brukeren er registrert')
+                }else{
+                    loginMessageEl.innerHTML = `<span class="name">${user.displayName}</span> har ikke adgang du der du hahahahhaah!`
+                }
+            }
+
+        }else{
+            userNameEl.innerHTML = "Not logged in"
+            loginErrorEl.classList.add('show')
+            festWrapperEl.classList.add('hide')
+        }
+    })
+}
+
+
 
 // Kommentarer
 let commentPlaceEls = document.querySelectorAll('.commentPlace')
@@ -264,6 +295,9 @@ let aktivKommentering
 for(let i=0; i<sendIconEls.length; i++){
     commentInputEls[i].addEventListener('click', function(){
         aktivKommentering = i
+    })
+    commentInputEls[i].addEventListener('touchstart', function(e) {
+        e.preventDefault()
     })
     sendIconEls[i].addEventListener('click', function sendComment(){
         aktivKommentering = i
@@ -282,6 +316,7 @@ document.addEventListener('keyup', function(e){
         sendIconEls[aktivKommentering].click()
     }
 })
+
 
 let comments
 
