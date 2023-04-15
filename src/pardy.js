@@ -299,9 +299,9 @@ for(let i=0; i<sendIconEls.length; i++){
     commentInputEls[i].addEventListener('click', function(){
         aktivKommentering = i
     })
-    commentInputEls[i].addEventListener('touchstart', function(e) {
+/*     commentInputEls[i].addEventListener('touchstart', function(e) {
         e.preventDefault()
-    })
+    }) */
     sendIconEls[i].addEventListener('click', function sendComment(){
         aktivKommentering = i
         const docRef = doc(db, 'comments', comments[aktivKommentering].id)

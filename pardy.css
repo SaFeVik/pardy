@@ -223,6 +223,7 @@ main{
     border-radius: 5px;
     outline: none;
     color: black;
+    touch-action: manipulation;
 
 }
 .sendIcon{
