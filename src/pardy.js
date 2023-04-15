@@ -172,7 +172,7 @@ onSnapshot(ratingsColRef, (snapshot) => {
     for(let i=0; i<festEls.length; i++){
         if(!ratings[i]){
             addDoc(ratingsColRef, {
-                rating: []
+                rating: [],
             })
         }
         if(ratings[i].rating.length > 0){
@@ -184,7 +184,7 @@ onSnapshot(ratingsColRef, (snapshot) => {
 function endreRating(Nr){
     let sum = 0
     for(let i=0; i<ratings[Nr].rating.length; i++){
-        sum += ratings[Nr].rating[i]
+        sum += ratings[Nr].rating[i].ratingNr
     }
 
     const ratingValue = Math.ceil(sum/ratings[Nr].rating.length)
@@ -210,9 +210,17 @@ for(let i=0; i<ratingRangeEls.length; i++){
         const ratingValue = Math.floor(ratingRangeEls[i].value/10)
 
         const docRef = doc(db, 'ratings', ratings[i].id)
-        ratings[i].rating.push(ratingValue)
+        console.log("rating:", ratings[i].rating)
+        ratings[i].rating.push(
+            {
+                ratingNr: ratingValue, 
+                userName: auth.currentUser.displayName
+            }
+        )
+/*         ratings[i].user.push(auth.currentUser.displayName) */
+        console.log("user:", auth.currentUser.displayName)
         updateDoc(docRef, {
-            rating: ratings[i].rating
+            rating: ratings[i].rating,
         })
     })
     ratingRangeEls[i].addEventListener('input', function(){
@@ -225,7 +233,6 @@ for(let i=0; i<ratingRangeEls.length; i++){
 // Slett ratings
 let baddiesBoxEl = document.querySelector('.baddiesBox')
 baddiesBoxEl.onclick = async function(){
-    console.log('slett')
     for(let i=0; i<ratings.length; i++){
         const docRef = doc(db, 'ratings', ratings[i].id)
         await deleteDoc(docRef)
@@ -257,25 +264,21 @@ onSnapshot(usersColRef, (snapshot) => {
     snapshot.docs.forEach((doc) => {
         users.push({ ...doc.data(), id: doc.id })
     })
-    console.log("users",users)
     authChange()
 })
 function authChange(){
     auth.onAuthStateChanged((user) =>{
-        console.log(user)
         if(user){
             for(let i=0; i<users.length; i++){
-                console.log(user.email, users[i].email)
                 if(user.email == users[i].email){
                     userNameEl.innerHTML = user.displayName
                     loginErrorEl.classList.remove('show')
                     festWrapperEl.classList.remove('hide')
-                    console.log('Brukeren er registrert')
+                    return
                 }else{
                     loginMessageEl.innerHTML = `<span class="name">${user.displayName}</span> har ikke adgang du der du hahahahhaah!`
                 }
             }
-
         }else{
             userNameEl.innerHTML = "Not logged in"
             loginErrorEl.classList.add('show')

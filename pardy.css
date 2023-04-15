@@ -75,17 +75,25 @@ main{
     border-radius: 2px;
     padding: 5px;
     color: white;
+    border: 2px solid rgb(122, 122, 122);
 }
 .userBox{
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    padding-block: 5px;
+    padding: 10px 5px;
     z-index: 2;
+    background: #73b1a1;
+    border-bottom: 1px solid #4c7c6f;
 }
 .name{
     color: rgb(255, 71, 71);
+}
+.thorvald{
+    font-size: 2px;
+    color: rgb(18, 18, 18);
+    padding: 5px;
 }
 
 /* Sted og rating */
@@ -212,7 +220,10 @@ main{
     width: 100%;
     padding: 10px;
     padding-block: 5px;
-    border-radius: 15px;
+    border-radius: 5px;
+    outline: none;
+    color: black;
+
 }
 .sendIcon{
     margin-top: 6px;
