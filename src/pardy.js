@@ -26,7 +26,7 @@ let fester = [
         baddies: "Valler",
         dato: "15/4/23",
         hovedbilde: "thorvald_naken.jpg",
-        bilder: ["felix_dapup.jpg", "filip_renessansen.jpg", "gustav_ansikt.jpg", "felix_johannes.jp"],
+        bilder: ["felix_dapup.jpg", "filip_renessansen.jpg", "gustav_ansikt.jpg", "felix_johannes.jpg", "thorvald_oppkast.jpg"],
         notes: ["Elias og Johannes var på festern", "En eneste stor orgie", "Dårlige samtaler", "Mat ble kastet"],
         medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "Gustav", "AndreasK", "JohannesG", "KasperS", "NRG type"]
     },
