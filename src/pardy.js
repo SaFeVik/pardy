@@ -21,6 +21,15 @@ let fester = [
         notes: ["Elias hjalp Iris", "Andy var på nære nippet", "Thorvald og Filip hadde despawna","Gustav var takknemlig"],
         medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "Gustav", "Thomas", "Sondre", "Ib", "Philip"]
     },
+    {
+        sted: "Thorvald",
+        baddies: "Valler",
+        dato: "15/4/23",
+        hovedbilde: "thorvald_naken.jpg",
+        bilder: ["felix_dapup.jpg", "filip_renessansen.jpg", "gustav_ansikt.jpg", "felix_johannes.jp"],
+        notes: ["Elias og Johannes var på festern", "En eneste stor orgie", "Dårlige samtaler", "Mat ble kastet"],
+        medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "Gustav", "AndreasK", "JohannesG", "KasperS", "NRG type"]
+    },
 ]
 
 // Lager fest elementer
