@@ -308,6 +308,7 @@ function authChange(){
                     break
                 }else{
                     loginMessageEl.innerHTML = `<span class="name">${user.displayName}</span> har ikke adgang du der du hahahahhaah!`
+                    signOut(auth)
                 }
             }
             for(let i=0; i<festEls.length; i++){
