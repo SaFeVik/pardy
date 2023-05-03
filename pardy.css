@@ -30,7 +30,6 @@ main{
     text-align: center;
     background: center no-repeat;
     background-size: cover;
-    overflow: auto;
     margin-block: 20px;
     border: 2px solid black;
 }
@@ -187,6 +186,15 @@ main{
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    padding-top: 10px;
+}
+.imagesBox{
+    width: 273.6px;
+    height: 486.4px;
+    overflow: auto;
 }
 .imagesSection img{
     width: 273.6px;

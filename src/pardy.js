@@ -30,6 +30,15 @@ let fester = [
         notes: ["Elias og Johannes var på festern", "En eneste stor orgie", "Dårlige samtaler", "Mat ble kastet"],
         medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "Gustav", "AndreasK", "JohannesG", "KasperS", "NRG type"]
     },
+    {
+        sted: "Felix",
+        baddies: "Rizzenvilde",
+        dato: "29/4/23",
+        hovedbilde: "johannes_bayda.jpg",
+        bilder: ["felix_bart.jpg", "felix_planke.jpg", "aef_hard.jpg", "felix_swipe.jpg", "gustav_rizz.jpg", "gustav_rar.jpg", "iris_munn.jpg"],
+        notes: ["Andreas hadde kontrakt", "God stemning", "Trekantdrama med G, M og A", "Mye cola, tusj og vektspetakkel"],
+        medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "Gustav", "AndreasK", "FilipT", "Marius", "EliasB"]
+    },
 ]
 
 // Lager fest elementer
@@ -64,7 +73,10 @@ for (let i = 0; i < fester.length; i++) {
             <img class="girlIcon" src="./bilder/icons/girl.png" alt="girl">
             <span class="baddies">${fester[i].baddies}</span>
         </h3>
-        <div class="imagesSection"><h1 class="x xI">X</h1></div>
+        <div class="imagesSection">
+            <div class="imagesBox"></div>
+            <h1 class="x xI">X</h1>
+        </div>
         <div class="notesSection"><h1 class="x xN">X</h1></div>
         <div class="commentSection">
             <h1 class="x xC">X</h1>
@@ -87,10 +99,11 @@ for (let i = 0; i < fester.length; i++) {
     ratingEls[i].style.background = "white"
     
     let imagesSectionEls = document.querySelectorAll(".imagesSection")
+    let imagesBoxEls = document.querySelectorAll(".imagesBox")
     let notesSectionEls = document.querySelectorAll(".notesSection")
     /* images */
     for(let j = 0; j < fester[i].bilder.length; j++) {
-        imagesSectionEls[i].innerHTML += `
+        imagesBoxEls[i].innerHTML += `
             <img src="./bilder/${fester[i].bilder[j]}" alt="fest" class="festBilde">
         `
     }
