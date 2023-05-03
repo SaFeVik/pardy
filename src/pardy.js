@@ -202,9 +202,10 @@ onSnapshot(ratingsColRef, (snapshot) => {
             })
         }
         for(let j=0; j<ratings[i].rating.length; j++){
-
-            if(ratings[i].rating[j].userName == auth.currentUser.displayName && auth.currentUser.displayName){
-                ratingBtns[i].style.display = "none"
+            if(auth.currentUser){
+                if(ratings[i].rating[j].userName == auth.currentUser.displayName){
+                    ratingBtns[i].style.display = "none"
+                }
             }
         }
         if(ratings[i].rating.length > 0){
@@ -301,29 +302,34 @@ function authChange(){
     auth.onAuthStateChanged((user) =>{
         if(user){
             for(let i=0; i<users.length; i++){
+                console.log(user.email, users[i].email, user.email == users[i].email)
                 if(user.email == users[i].email){
+                    console.log("logget inn")
                     userNameEl.innerHTML = user.displayName
                     loginErrorEl.classList.remove('show')
+                    console.log(loginErrorEl.classList)
                     festWrapperEl.classList.remove('hide')
                     break
                 }else{
+                    console.log("ikke logget inn")
                     loginMessageEl.innerHTML = `<span class="name">${user.displayName}</span> har ikke adgang du der du hahahahhaah!`
-                    signOut(auth)
+                    if(i == users.length-1){
+                        signOut(auth)
+                    }
                 }
             }
             for(let i=0; i<festEls.length; i++){
                 for(let j=0; j<ratings[i].rating.length; j++){
                     if(ratings[i].rating[j].userName == user.displayName){
                         ratingBtns[i].style.display = "none"
-                        console.log("none", ratings[i].rating[j].userName)
                         break
                     }else{
                         ratingBtns[i].style.display = "block"
-                        console.log("block", ratings[i].rating[j].userName)
                     }
                 }
             }
         }else{
+            console.log("lure else")
             userNameEl.innerHTML = "Not logged in"
             loginErrorEl.classList.add('show')
             festWrapperEl.classList.add('hide')
