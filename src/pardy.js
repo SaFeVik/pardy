@@ -35,8 +35,8 @@ let fester = [
         baddies: "Rizzenvilde",
         dato: "29/4/23",
         hovedbilde: "johannes_bayda.jpg",
-        bilder: ["felix_bart.jpg", "felix_planke.jpg", "aef_hard.jpg", "felix_swipe.jpg", "gustav_rizz.jpg", "gustav_rar.jpg", "iris_munn.jpg"],
-        notes: ["Andreas hadde kontrakt", "God stemning", "Trekantdrama med G, M og A", "Mye cola, tusj og vektspetakkel"],
+        bilder: ["johannes_bokse.jpg", "thorvald_vannpistol.jpg", "felix_bart.jpg", "felix_planke.jpg", "aef_hard.jpg", "felix_swipe.jpg", "johannes_fingern.jpg", "gustav_rizz.jpg", "iris_munn.jpg"],
+        notes: ["Andreas hadde kontrakt", "God stemning", "Trekantdrama med Gusti Madeleine og Andy", "Mye cola, tusj og vektspetakkel"],
         medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "Gustav", "AndreasK", "FilipT", "Marius", "EliasB"]
     },
 ]
@@ -57,10 +57,11 @@ for (let i = 0; i < fester.length; i++) {
             <img src="./bilder/icons/star.png" alt="star">
         </div>
         <div class="ratingBox">
+            <h1 class="x xR">X</h1>
             <p>Hva rater du denne festen?</p>
             <input type="range" name="rating" class="ratingRange">
             <span class="ratingValue">5</span>
-            <button class="ratingButton">Submit rating</button>
+            <button class="ratingButton">Send rating</button>
         </div>
         <img src="./bilder/icons/comment_icon.png" alt="comment" class="comment">
         <img src="./bilder/icons/images_icon.png" alt="images" class="images">
@@ -121,6 +122,7 @@ let festEls = document.querySelectorAll(".fest")
 let imagesSectionEls = document.querySelectorAll(".imagesSection")
 let commentSectionEls = document.querySelectorAll(".commentSection")
 let notesSectionEls = document.querySelectorAll(".notesSection")
+let ratingBoxEls = document.querySelectorAll('.ratingBox')
 
 // X knapper for images, notes og comments
 for(let i=0; i<festEls.length; i++){
@@ -149,6 +151,9 @@ for(let i=0; i<festEls.length; i++){
             }
             else if(xBtns[j].classList.contains('xC')){
                 commentSectionEls[i].classList.remove('show')
+            }else if(xBtns[j].classList.contains('xR')){
+                ratingBoxEls[i].classList.remove('show')
+                ratingEls[i].style.background = endreRating(i)
             }
         })
     }
@@ -196,6 +201,12 @@ onSnapshot(ratingsColRef, (snapshot) => {
                 rating: [],
             })
         }
+        for(let j=0; j<ratings[i].rating.length; j++){
+
+            if(ratings[i].rating[j].userName == auth.currentUser.displayName && auth.currentUser.displayName){
+                ratingBtns[i].style.display = "none"
+            }
+        }
         if(ratings[i].rating.length > 0){
             ratingEls[i].style.background = endreRating(i)
         }
@@ -217,7 +228,6 @@ function endreRating(Nr){
 const ratingRangeEls = document.querySelectorAll('.ratingRange')
 const ratingValueEls = document.querySelectorAll('.ratingValue')
 const ratingEls = document.querySelectorAll('.rating')
-const ratingBoxEls = document.querySelectorAll('.ratingBox')
 const ratingBtns = document.querySelectorAll('.ratingButton')
 
 
@@ -231,34 +241,31 @@ for(let i=0; i<ratingRangeEls.length; i++){
         const ratingValue = Math.floor(ratingRangeEls[i].value/10)
 
         const docRef = doc(db, 'ratings', ratings[i].id)
-        console.log("rating:", ratings[i].rating)
         ratings[i].rating.push(
             {
                 ratingNr: ratingValue, 
                 userName: auth.currentUser.displayName
             }
         )
-/*         ratings[i].user.push(auth.currentUser.displayName) */
-        console.log("user:", auth.currentUser.displayName)
         updateDoc(docRef, {
             rating: ratings[i].rating,
         })
     })
     ratingRangeEls[i].addEventListener('input', function(){
-        const ratingValue = Math.floor(ratingRangeEls[i].value/10)
-        ratingValueEls[i].innerHTML = ratingValue
-        ratingEls[i].style.background = `linear-gradient(to right, hsl(${ratingValue*12.5}, 100%, 43%) 0%, hsl(${ratingValue*12.5}, 100%, 43%) ${ratingValue}0%, #ffffff ${ratingValue}0%, #ffffff 100%)`
+        const ratingValue = ratingRangeEls[i].value/10
+        ratingValueEls[i].innerHTML = Math.floor(ratingValue)
+        ratingEls[i].style.background = `linear-gradient(to right, hsl(${ratingValue*12.5}, 100%, 43%) 0%, hsl(${ratingValue*12.5}, 100%, 43%) ${ratingValue*10}%, #ffffff ${ratingValue*10}%, #ffffff 100%)`
     })
 }
 
 // Slett ratings
-let baddiesBoxEl = document.querySelector('.baddiesBox')
+/* let baddiesBoxEl = document.querySelector('.baddiesBox')
 baddiesBoxEl.onclick = async function(){
     for(let i=0; i<ratings.length; i++){
         const docRef = doc(db, 'ratings', ratings[i].id)
         await deleteDoc(docRef)
     }
-}
+} */
 
 // Google Authenticatino
 const googleProvider = new GoogleAuthProvider()
@@ -273,6 +280,9 @@ const loginErrorEl = document.querySelector('#loginError')
 let loginMessageEl = document.querySelector('.loginMessage')
 
 function signingIn(){
+    if(auth){
+        signOut(auth)
+    }
     signInWithPopup(auth, googleProvider)
 }
 function signingOut(){
@@ -295,9 +305,21 @@ function authChange(){
                     userNameEl.innerHTML = user.displayName
                     loginErrorEl.classList.remove('show')
                     festWrapperEl.classList.remove('hide')
-                    return
+                    break
                 }else{
                     loginMessageEl.innerHTML = `<span class="name">${user.displayName}</span> har ikke adgang du der du hahahahhaah!`
+                }
+            }
+            for(let i=0; i<festEls.length; i++){
+                for(let j=0; j<ratings[i].rating.length; j++){
+                    if(ratings[i].rating[j].userName == user.displayName){
+                        ratingBtns[i].style.display = "none"
+                        console.log("none", ratings[i].rating[j].userName)
+                        break
+                    }else{
+                        ratingBtns[i].style.display = "block"
+                        console.log("block", ratings[i].rating[j].userName)
+                    }
                 }
             }
         }else{
@@ -320,9 +342,6 @@ for(let i=0; i<sendIconEls.length; i++){
     commentInputEls[i].addEventListener('click', function(){
         aktivKommentering = i
     })
-/*     commentInputEls[i].addEventListener('touchstart', function(e) {
-        e.preventDefault()
-    }) */
     sendIconEls[i].addEventListener('click', function sendComment(){
         aktivKommentering = i
         const docRef = doc(db, 'comments', comments[aktivKommentering].id)

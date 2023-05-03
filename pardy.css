@@ -8,7 +8,7 @@ body{
     background-color: #B9EDDD;
 }
 main{
-    width: 400px;
+    max-width: 400px;
     margin: 0 auto;
 }
 #festWrapper{
@@ -67,6 +67,7 @@ main{
     padding: 5px;
     color: white;
     cursor: pointer;
+    border: 2px solid rgb(122, 122, 122);
 }
 #userName{
     font-size: 20px;
@@ -81,7 +82,7 @@ main{
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    padding: 10px 5px;
+    padding: 10px 15px;
     z-index: 2;
     background: #73b1a1;
     border-bottom: 1px solid #4c7c6f;
@@ -132,21 +133,30 @@ main{
     align-items: center;
     color: white;
     padding-top: 70px;
+    text-align: start;
+    padding-inline: 10px;
+}
+.ratingBox p{
+    font-weight: bold;
 }
 .ratingBox.show{
     display: block;
 }
 .ratingRange{
-    width: 250px;
+    width: 230px;
     cursor: pointer;
 }
 .ratingValue{
-    font-size: 20px;
+    font-size: 25px;
+    margin: 0 auto;
 }
 .ratingButton{
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
+    border: 1px solid white;
+    width: 230px;
+    margin-block: 5px;
 }
 
 /* Comments, images, notes */
@@ -174,7 +184,7 @@ main{
 .imagesSection, .notesSection, .commentSection{
     position: absolute;
     width: 100%;
-    background: rgb(0, 0, 0);
+    background: black;
     display: none;
     padding: 10px;
     z-index: 2;
@@ -208,6 +218,7 @@ main{
     color: white;
     height: 100%;
     line-height: 20px;
+    background-color: #20453c;
 }
 /* Commentsection */
 .commentSection{
@@ -248,6 +259,7 @@ main{
     width: 100%;
     color: white;
     overflow: auto;
+    border-radius: 5px;
 }
 .commentDiv{
     position: relative;
@@ -277,6 +289,15 @@ main{
     position: absolute;
     top: 15px;
     right: 25px;
+    cursor: pointer;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    z-index: 1;
+}
+.xR{
+    top: 60px;
+    right: 15px;
+    font-size: 25px;
     cursor: pointer;
     color: white;
     text-shadow: 1px 1px 1px black;
