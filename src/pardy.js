@@ -98,7 +98,6 @@ for (let i = 0; i < fester.length; i++) {
 
     ratingEls[i].style.background = "white"
     
-    let imagesSectionEls = document.querySelectorAll(".imagesSection")
     let imagesBoxEls = document.querySelectorAll(".imagesBox")
     let notesSectionEls = document.querySelectorAll(".notesSection")
     /* images */

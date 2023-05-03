@@ -8,7 +8,7 @@ body{
     background-color: #B9EDDD;
 }
 main{
-    max-width: 400px;
+    width: 400px;
     margin: 0 auto;
 }
 #festWrapper{
@@ -38,13 +38,13 @@ main{
 #loginError{
     display: none;
     position: absolute;
-    background-color: rgb(23, 58, 172);
+    background-color: #87CBB9;
     height: 100%;
     width: 400px;
     z-index: 5;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: rgb(45, 45, 45);
     flex-direction: column;
     gap: 20px;
     text-align: center;
