@@ -39,6 +39,15 @@ let fester = [
         notes: ["Andreas hadde kontrakt", "God stemning", "Trekantdrama med Gusti Madeleine og Andy", "Mye cola, tusj og vektspetakkel"],
         medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "Gustav", "AndreasK", "FilipT", "Marius", "EliasB"]
     },
+    {
+        sted: "Elias, Thorvald, Felix",
+        baddies: "Rosen",
+        dato: "17. mai",
+        hovedbilde: "alle_snork.jpg",
+        bilder: ["alle_beerpong.jpeg", "alle_frokost.jpeg", "alle_snork.jpg", "bomo_rist.jpg", "cA_utenBukser.jpeg", "tJE_bordchill.jpeg", "tJF_sverd.jpeg"],
+        notes: ["FilipT hadde vondt", "AndreasKj spawna inn med random utlending", "Mye cola, tusj og vektspetakkel"],
+        medlemmer: ["Felix", "Elias", "Thorvald",  "Johannes", "Andy", "Filip", "(FilipT)", "Gustav", "AndreasKj", "EliasB", "Markus", "Sander", "Oskar", "Stephan", "Johan", "Christian", "Olav", "Nicholas", "Max", "(Sebastian)", "(Random1)", "(Random2)", "(Random3)"]
+    },
 ]
 
 // Lager fest elementer
@@ -302,16 +311,12 @@ function authChange(){
     auth.onAuthStateChanged((user) =>{
         if(user){
             for(let i=0; i<users.length; i++){
-                console.log(user.email, users[i].email, user.email == users[i].email)
                 if(user.email == users[i].email){
-                    console.log("logget inn")
                     userNameEl.innerHTML = user.displayName
                     loginErrorEl.classList.remove('show')
-                    console.log(loginErrorEl.classList)
                     festWrapperEl.classList.remove('hide')
                     break
                 }else{
-                    console.log("ikke logget inn")
                     loginMessageEl.innerHTML = `<span class="name">${user.displayName}</span> har ikke adgang du der du hahahahhaah!`
                     if(i == users.length-1){
                         signOut(auth)
@@ -329,7 +334,6 @@ function authChange(){
                 }
             }
         }else{
-            console.log("lure else")
             userNameEl.innerHTML = "Not logged in"
             loginErrorEl.classList.add('show')
             festWrapperEl.classList.add('hide')
